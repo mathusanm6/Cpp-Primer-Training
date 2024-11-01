@@ -51,26 +51,53 @@ Sales_item read_and_add_two_items()
 void read_and_add_same_isbn()
 {
     Sales_item prev, curr, sum;
-    std::cin >> prev;
-    sum = prev;
-    while (std::cin >> curr)
+    if (std::cin >> prev)
     {
-        if (prev.isbn() == curr.isbn())
+        sum = prev;
+        while (std::cin >> curr)
         {
-            sum += curr;
+            if (prev.isbn() == curr.isbn())
+            {
+                sum += curr;
+            }
+            else
+            {
+                prev = curr;
+                std::cout << sum << std::endl;
+                sum = prev;
+            }
         }
-        else
-        {
-            prev = curr;
-            std::cout << sum << std::endl;
-            sum = prev;
-        }
+        std::cout << sum << std::endl;
     }
-    std::cout << sum << std::endl;
+}
+
+void read_and_count_same_isbn()
+{
+    Sales_item prev, curr;
+    int count = 0;
+    if (
+        std::cin >> prev)
+    {
+        count = 1;
+        while (std::cin >> curr)
+        {
+            if (prev.isbn() == curr.isbn())
+            {
+                ++count;
+            }
+            else
+            {
+                std::cout << "ISBN: " << prev.isbn() << " has " << count << " transactions." << std::endl;
+                prev = curr;
+                count = 1;
+            }
+        }
+        std::cout << "ISBN: " << prev.isbn() << " has " << count << " transactions." << std::endl;
+    }
 }
 
 int main()
 {
-    read_and_add_same_isbn();
+    read_and_count_same_isbn();
     return 0;
 }
