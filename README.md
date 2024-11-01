@@ -1,6 +1,6 @@
 # C++ Primer Training Project
 
-This repository contains C++ code samples that I wrote while working through the *C++ Primer* book. Each example represents a concept or experiment as I test and learn different features in C++. The code is structured in chapters and sections, and I’ve implemented a Makefile to simplify building and running each example.
+This repository contains C++ code samples that I wrote while working through the _C++ Primer_ book. Each example represents a concept or experiment as I test and learn different features in C++. The code is structured in chapters and sections, and I’ve implemented a Makefile to simplify building and running each example.
 
 ### Prerequisites
 
@@ -44,22 +44,28 @@ This will find all `main.cpp` files in the `src/` directory and compile them int
 
 ### Running a Specific Example
 
-To run a specific example, use the `make run` command with `chapter` and `section` parameters. Optionally, you can add a `subsection` parameter if the code is nested further.
+To run a specific example, use the `make run` command with `chapter` and `section` parameters. Optionally, you can add a `subsection` parameter if the code is nested further. You can also specify optional input and output files to feed input or redirect output as needed.
 
 ```bash
-make run chapter=<chapter> section=<section> [subsection=<subsection>]
+make run chapter=<chapter> section=<section> [subsection=<subsection>] < input_file > output_file
 ```
 
-For example, to run the code in `src/chapter1/section1/main.cpp`, you would use:
+For example, to run the code in `src/chapter1/section1/main.cpp`:
 
 ```bash
 make run chapter=chapter1 section=section1
 ```
 
-If there’s a subsection, you can specify it as well:
+If there’s a subsection, specify it as well:
 
 ```bash
 make run chapter=chapter1 section=section1 subsection=subsection1
+```
+
+You can also provide an input file and/or an output file to redirect the program’s input and output:
+
+```bash
+make run chapter=chapter1 section=section1 < data.txt > result.txt
 ```
 
 ### Cleaning Up
@@ -74,5 +80,5 @@ This will delete the `build/` directory and all its contents.
 
 ### Notes
 
-- This project is purely for my learning and understanding as I work through the *C++ Primer* book. It is not intended for collaborative development.
+- This project is purely for my learning and understanding as I work through the _C++ Primer_ book. It is not intended for collaborative development.
 - The code here serves as a reference for testing different approaches and outcomes.

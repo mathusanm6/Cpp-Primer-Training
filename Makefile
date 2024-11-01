@@ -21,20 +21,20 @@ $(BUILD_DIR)/%/main: $(SRC_DIR)/%/main.cpp
 	@mkdir -p $(@D) # Create the build directory if it doesn't exist
 	$(CXX) $(CXXFLAGS) -target arm64-apple-macos -o $@ $< $(LDFLAGS)
 
-# Run target with chapter, section, and optional subsection variables
+# Run target with chapter, section, and optional subsection variables, input, and output
 run: 
 ifndef chapter
-	$(error Chapter not specified. Usage: make run chapter=<chapter> section=<section> [subsection=<subsection>])
+	$(error Chapter not specified. Usage: make run chapter=<chapter> section=<section> [subsection=<subsection>] [input=<input_file>] [output=<output_file>])
 endif
 ifndef section
-	$(error Section not specified. Usage: make run chapter=<chapter> section=<section> [subsection=<subsection>])
+	$(error Section not specified. Usage: make run chapter=<chapter> section=<section> [subsection=<subsection>] [input=<input_file>] [output=<output_file>])
 endif
 ifeq ($(subsection),)
 	@echo "Running $(BUILD_DIR)/$(chapter)/$(section)/main"
-	$(BUILD_DIR)/$(chapter)/$(section)/main
+	$(BUILD_DIR)/$(chapter)/$(section)/main $(if $(input), < $(input)) $(if $(output), > $(output))
 else
 	@echo "Running $(BUILD_DIR)/$(chapter)/$(section)/$(subsection)/main"
-	$(BUILD_DIR)/$(chapter)/$(section)/$(subsection)/main
+	$(BUILD_DIR)/$(chapter)/$(section)/$(subsection)/main $(if $(input), < $(input)) $(if $(output), > $(output))
 endif
 
 # Clean compiled objects
